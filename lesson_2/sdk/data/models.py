@@ -236,17 +236,45 @@ class Networks:
         )
     )
 
-    # todo: сделать самостоятельно
-    Fantom = ...
+    Fantom = Network(
+        name='fantom',
+        rpc='https://fantom.publicnode.com',
+        chain_id=250,
+        tx_type=2,
+        coin_symbol='FTM',
+        explorer='https://ftmscan.com/',
+        api=API(key=config.FANTOM_API_KEY, url='https://api.ftmscan.com/api', docs='https://docs.fantom.foundation/')
+    )
 
-    # todo: сделать самостоятельно
-    Celo = ...
+    Celo = Network(
+        name='celo',
+        rpc='https://1rpc.io/celo',
+        chain_id=42220,
+        tx_type=2,
+        coin_symbol='CELO',
+        explorer='https://celoscan.io/',
+        api=API(key=config.CELO_API_KEY, url='https://api.celoscan.io/api', docs='https://docs.celo.org/')
+    )
 
-    # todo: сделать самостоятельно
-    Gnosis = ...
+    Gnosis = Network(
+        name='gnosis',
+        rpc='https://rpc.gnosischain.com',
+        chain_id=100,
+        tx_type=2,
+        coin_symbol='XDAI',
+        explorer='https://gnosisscan.io/',
+        api=API(key=config.GNOSIS_API_KEY, url='https://api.gnosisscan.io/api', docs='https://docs.gnosischain.com/')
+    )
 
-    # todo: сделать самостоятельно
-    HECO = ...
+    HECO = Network(
+        name='heco',
+        rpc='https://http-mainnet-node.huobichain.com',
+        chain_id=128,
+        tx_type=2,
+        coin_symbol='HT',
+        explorer='https://www.hecoinfo.com/en-us/',
+        api=API(key=config.HECO_API_KEY, url='https://api.hecoinfo.com/api', docs='https://docs.hecochain.com/')
+    )
 
     # Testnets
     Goerli = Network(
@@ -262,8 +290,18 @@ class Networks:
         )
     )
 
-    # todo: сделать самостоятельно
-    Sepolia = ...
+    Sepolia = Network(
+        name='sepolia',
+        rpc='https://rpc2.sepolia.org/',
+        chain_id=11155111,
+        tx_type=2,
+        coin_symbol='ETH',
+        explorer='https://sepolia.etherscan.io/',
+        api=API(
+            key=config.SEPOLIA_API_KEY,
+            url='https://api-sepolia.etherscan.io/api',
+            docs='https://docs.etherscan.io/v/sepolia-etherscan')
+    )
 
 
 class Unit:
