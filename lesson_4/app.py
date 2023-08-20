@@ -55,24 +55,6 @@ async def main():
     #         print(key, val)
 
 
-    # for key, val in res[1].items():
-    #     if isinstance(val, bytes):
-    #         print(key, val.hex())
-    #
-    #     elif isinstance(val, tuple):
-    #         print(key, '(', end='')
-    #         for item in val:
-    #             if isinstance(item, bytes):
-    #                 print(item.hex(), end=', ')
-    #             else:
-    #                 print(item, end=', ')
-    #         print(')')
-    #     else:
-    #         print(key, val)
-
-
-
-
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()
     loop.run_until_complete(main())
