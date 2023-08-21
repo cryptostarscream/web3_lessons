@@ -343,12 +343,43 @@ class Unit:
             raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __sub__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        if isinstance(other, (Unit, TokenAmount)):
+            if self.decimals != other.decimals:
+                raise ArithmeticError('The values have different decimals!')
+
+            return Wei(self.Wei - other.Wei)
+
+        elif isinstance(other, int):
+            return Wei(self.Wei - other)
+
+        elif isinstance(other, float):
+            if self.unit == 'gwei':
+                return GWei(self.GWei - GWei(other).GWei)
+            else:
+                return Ether(self.Ether - Ether(other).Ether)
+
+        else:
+            raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __mul__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        if isinstance(other, (Unit, TokenAmount)):
+            if self.decimals != other.decimals:
+                raise ArithmeticError('The values have different decimals!')
+
+            return Wei(self.Wei * other.Wei)
+
+        elif isinstance(other, int):
+            return Wei(self.Wei * Decimal(str(other)))
+
+        elif isinstance(other, float):
+            if self.unit == 'gwei':
+                return GWei(self.GWei * GWei(other).GWei)
+
+            else:
+                return Ether(self.Ether * Ether(other).Ether)
+
+        else:
+            raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __truediv__(self, other):
         if isinstance(other, (Unit, TokenAmount)):
@@ -374,12 +405,10 @@ class Unit:
         return self.__add__(other)
 
     def __isub__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        return self.__sub__(other)
 
     def __imul__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        return self.__mul__(other)
 
     def __itruediv__(self, other):
         return self.__truediv__(other)
@@ -405,8 +434,24 @@ class Unit:
             raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __le__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        if isinstance(other, (Unit, TokenAmount)):
+            if self.decimals != other.decimals:
+                raise ArithmeticError('The values have different decimals!')
+
+            return self.Wei <= other.Wei
+
+        elif isinstance(other, int):
+            return self.Wei <= other
+
+        elif isinstance(other, float):
+            if self.unit == 'gwei':
+                return self.GWei <= GWei(other).GWei
+
+            else:
+                return self.Ether <= Ether(other).Ether
+
+        else:
+            raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __eq__(self, other):
         if isinstance(other, (Unit, TokenAmount)):
@@ -429,8 +474,24 @@ class Unit:
             raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __ne__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        if isinstance(other, (Unit, TokenAmount)):
+            if self.decimals != other.decimals:
+                raise ArithmeticError('The values have different decimals!')
+
+            return self.Wei != other.Wei
+
+        elif isinstance(other, int):
+            return self.Wei != other
+
+        elif isinstance(other, float):
+            if self.unit == 'gwei':
+                return self.GWei != GWei(other).GWei
+
+            else:
+                return self.Ether != Ether(other).Ether
+
+        else:
+            raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __gt__(self, other):
         if isinstance(other, (Unit, TokenAmount)):
@@ -453,8 +514,24 @@ class Unit:
             raise ArithmeticError(f"{type(other)} type isn't supported!")
 
     def __ge__(self, other):
-        # todo: сделать самостоятельно
-        pass
+        if isinstance(other, (Unit, TokenAmount)):
+            if self.decimals != other.decimals:
+                raise ArithmeticError('The values have different decimals!')
+
+            return self.Wei >= other.Wei
+
+        elif isinstance(other, int):
+            return self.Wei >= other
+
+        elif isinstance(other, float):
+            if self.unit == 'gwei':
+                return self.GWei >= GWei(other).GWei
+
+            else:
+                return self.Ether >= Ether(other).Ether
+
+        else:
+            raise ArithmeticError(f"{type(other)} type isn't supported!")
 
 
 class Wei(Unit):
@@ -492,21 +569,21 @@ class Ether(Unit):
         super().__init__(amount, 'ether')
 
 
-# todo: сделать самостоятельно
 class KEther(Unit):
-    pass
+    def __init__(self, amount: Union[int, float, str, Decimal]) -> None:
+        super().__init__(amount, 'kether')
 
 
-# todo: сделать самостоятельно
 class MEther(Unit):
-    pass
+    def __init__(self, amount: Union[int, float, str, Decimal]) -> None:
+        super().__init__(amount, 'mether')
 
 
-# todo: сделать самостоятельно
 class GEther(Unit):
-    pass
+    def __init__(self, amount: Union[int, float, str, Decimal]) -> None:
+        super().__init__(amount, 'gether')
 
 
-# todo: сделать самостоятельно
 class TEther(Unit):
-    pass
+    def __init__(self, amount: Union[int, float, str, Decimal]) -> None:
+        super().__init__(amount, 'tether')

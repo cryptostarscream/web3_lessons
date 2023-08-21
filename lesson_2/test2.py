@@ -83,7 +83,7 @@ class Person:
         self.age = age
 
     def __add__(self, other):
-        return Person(name=self.name, age=self.age + other.age)
+        return Person(name=self.name + other.name, age=self.age + other.age)
 
     def __sub__(self, other):
         return Person(name=self.name, age=self.age - other.age)
